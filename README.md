@@ -6,8 +6,8 @@ Tokyo Metropolitan College of Industrial Technology の Topics ( http://www.metr
 使い方
 -----
 ### ###
-   $ ruby get.rb
-あとは自動的に rss ディレクトリ内に RSS が日時順に保存されます。
+    $ ruby get.rb
+あとは自動的に rss ディレクトリ内に RSS が日時順に保存されます。    
 また、カレントディレクトリにも rss.xml で最新の RSS にシンボリックリンクが貼られているはずです。
 
 仕様
