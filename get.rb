@@ -81,7 +81,6 @@ log.info("Extracting dates from HTML...")
 begin
   doc.xpath('//*[@id="top_main"]/div/div/table/tr/td[@class="dates"]').children.each do |cld|
     num.push(cld)
-    puts cld
   end
 rescue => e
   log.fatal("Extracting dates error!")
@@ -100,7 +99,6 @@ begin
     n2 = nn.to_s
     b = n2.split(".")
     numcv.push(b)
-    puts b 
   end
 rescue => r
   log.fatal("Converting dates error!")
