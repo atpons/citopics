@@ -7,7 +7,7 @@ require "logger"
 
 puts "[CITopics]"
 logdate = Time.now
-log = Logger.new("logs/rss.log" , "daily")
+log = Logger.new("rss.log" , "daily")
 log.level = Logger::INFO
 
 log.info("[CITopics]")
@@ -21,7 +21,7 @@ addr = []
 log.progname="gethtml"
 log.info("HTML Opening...")
 begin
-  doc = Nokogiri::HTML(open('http://www.metro-cit.ac.jp/topics/index.html', 'User-Agent' => 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)').read)
+  doc = Nokogiri::HTML(open('http://www.metro-cit.ac.jp', 'User-Agent' => 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)').read)
 rescue => r
   log.fatal("HTML Open Error!")
   log.fatal(r)
@@ -33,11 +33,11 @@ end
 log.progname="titlescrap"
 log.info("Extract titles from HTML...")
 begin
-  doc.xpath('//div[@id="indexC_w"]/dl/dd/a').each do |c|
-    a = NKF.nkf("-w" , c).to_s.gsub("<br />","")
-    tt = a.to_s.gsub("" , "")
-    title.push(tt)
-    log.info("Analyzed title : " + a)
+  doc.xpath('//*[@id="top_main"]/div/div/table/tr/td/a').each do |c|
+    #a = NKF.nkf("-w" , c).to_s.gsub("<br />","")
+    #tt = a.to_s.gsub("" , "")
+    title.push(c)
+    log.info("Analyzed title : " + c)
   end
 rescue => e
   log.fatal("Extract titles error!")
@@ -50,7 +50,7 @@ end
 log.progname="urlscrap"
 log.info("Extracting URLs from HTML...")
 begin
-  doc.xpath('//div[@id="indexC_w"]/dl/dd/a/@href').each do |d|
+  doc.xpath('//*[@id="top_main"]/div/div/table/tr/td/a/@href').each do |d|
     case d
     when /^\.\.\// 
       url = d.to_s.gsub("../", "http://www.metro-cit.ac.jp/")
@@ -62,7 +62,7 @@ begin
       url = d
       log.info("Not fixed link. [Type:URL starts with https] [URL: " + url +"]")
     else
-      url = d.to_s.insert(0, "http://www.metro-cit.ac.jp/topics/")
+      url = d.to_s.insert(0, "http://www.metro-cit.ac.jp")
       log.info("Fixed link. [Type:URL starts with current directory] [URL: " + url +"]")
     end
     addr.push(url)
@@ -78,8 +78,9 @@ end
 log.progname="datescrap"
 log.info("Extracting dates from HTML...")
 begin
-  doc.xpath('//div[@id="indexC_w"]/dl/dt').children.each do |cld|
+  doc.xpath('//*[@id="top_main"]/div/div/table/tr/td[@class="dates"]').children.each do |cld|
     num.push(cld)
+    puts cld
   end
 rescue => e
   log.fatal("Extracting dates error!")
@@ -97,6 +98,7 @@ begin
     n2 = nn.to_s
     b = n2.split(".")
     numcv.push(b)
+    puts b 
   end
 rescue => r
   log.fatal("Converting dates error!")
@@ -117,9 +119,9 @@ begin
     rss.channel.language = "ja"
 
     rss.items.do_sort = true
-    rss.items.max_size = 20
+    rss.items.max_size = 7
 
-    20.times { |i|
+    7.times { |i|
       i = rss.items.new_item
       i.title = title.shift
       i.link = addr.shift
@@ -161,3 +163,5 @@ end
 #finished
 log.progname=""
 log.info("Finished all steps.")
+
+
