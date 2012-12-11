@@ -37,8 +37,10 @@ Tokyo Metropolitan College of Industrial Technology の Topics ( http://www.metr
 
 注意事項
 -----
+### ###
 + Web サイト側の仕様変更により、以前最大 20 件だった取得件数が最大 7 件となりました。
 
 LICENSE
 -----
+### ###
 + License file is "LICENSE".
