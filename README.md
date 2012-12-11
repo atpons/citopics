@@ -1,7 +1,6 @@
 citopics
 ========
-現在取得先サイトによる仕様変更のため取得に失敗します。 (2012/10)
-----
+
 Tokyo Metropolitan College of Industrial Technology の Topics ( http://www.metro-cit.ac.jp/topics/index.html ) から1つずつ情報を取得し、RSS化して保存します。
 また、Sinatraによる RSS 提供サーバ風のものも付いています。
 
@@ -17,7 +16,7 @@ Tokyo Metropolitan College of Industrial Technology の Topics ( http://www.metr
 ### ###
 + open-uri による HTML の取得
 + タイトル,URL,日付を nokogiri でパース
-+ rss/maker による RSS 化
++ rss/maker による RSS 化 (最大 7 件)
 + シンボリックリンクを追加
 + logger によるログ記録 (logs内に保存)
 
@@ -26,3 +25,11 @@ Tokyo Metropolitan College of Industrial Technology の Topics ( http://www.metr
 ### ###
 + ``server.rb``を使うと、 Sinatra で RSS を配信 (更新日時の表示) をしてくれます。
 + ```/``` にアクセスされると更新日時とかが出ます。 ```/rss.xml``` にアクセスされると最新のRSSを吐きます。
+
+注意事項
+-----
++ Web サイト側の仕様変更により、以前最大 20 件だった取得件数が最大 7 件となりました。
+
+LICENSE
+-----
++ License file is "LICENSE".
