@@ -20,6 +20,15 @@ Tokyo Metropolitan College of Industrial Technology の Topics ( http://www.metr
 + シンボリックリンクを追加
 + logger によるログ記録 (logs内に保存)
 
+生成後の RSS について
+-----
+### ###
++ RSS 2.0 形式で生成されます。
+ + 記事タイトル: トピックタイトル
+ + 記事内容: カテゴリ名
+ + 記事URL : トピックリンク先
+ + 記事日時 : トピック追加日時 + 00:00:00
+
 サーバについて
 -----
 ### ###
