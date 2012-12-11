@@ -25,6 +25,7 @@ begin
 rescue => r
   log.fatal("HTML Open Error!")
   log.fatal(r)
+  puts r
 else
   log.info("HTML Opened!")
 end
@@ -34,14 +35,13 @@ log.progname="titlescrap"
 log.info("Extract titles from HTML...")
 begin
   doc.xpath('//*[@id="top_main"]/div/div/table/tr/td/a').children.each do |c|
-    #a = NKF.nkf("-w" , c).to_s.gsub("<br />","")
-    #tt = a.to_s.gsub("" , "")
     title.push(c)
     log.info("Analyzed title : " + c)
   end
 rescue => e
   log.fatal("Extract titles error!")
   log.fatal(e)
+  puts e
 else
   log.info("Finished extract titles from HTML!")
 end
@@ -70,6 +70,7 @@ begin
 rescue => e
   log.fatal("Extracting titles error!")
   log.fatal(e)
+  puts e
 else
   log.info("Finished extracting URLs from HTML!")
 end
@@ -85,6 +86,7 @@ begin
 rescue => e
   log.fatal("Extracting dates error!")
   log.fatal(e)
+  puts e
 else
   log.info("Finished extracting dates from HTML!")
 end
@@ -102,7 +104,8 @@ begin
   end
 rescue => r
   log.fatal("Converting dates error!")
-  log.fatal(e)
+  log.fatal(r)
+  puts r
 else
   log.info("Finished converting dates!")
 end
@@ -112,9 +115,9 @@ log.progname="makerss"
 log.info("Making RSS...")
 begin
   rss = RSS::Maker.make("2.0") do |rss|
-    #  rss.channel.about = "http://www.metro-cit.ac.jp/"
+    rss.channel.about = "http://www.metro-cit.ac.jp/"
     rss.channel.title = "TMCIT Topics (Unofficial)"
-    rss.channel.description = "自動的に取得したもので、非公式ですので掲載内容について一切の責任を負いません。"
+    rss.channel.description = "自動的に取得したもので、非公式ですので掲載内容について一切の責任を負いません。 Made by citopics"
     rss.channel.link = "http://www.metro-cit.ac.jp/topics/index.html"
     rss.channel.language = "ja"
 
@@ -131,7 +134,8 @@ begin
   end
 rescue => r
   log.fatal("Making RSS error!")
-  log.fatal(e)
+  log.fatal(r)
+  puts r
 else
   log.info("Finished making dates!")
 end
@@ -155,7 +159,8 @@ begin
   ln2 = system("ln -f -s rss/" + filename + " " + "../public")
 rescue => r
   log.fatal("Making RSS error!")
-  log.fatal(e)
+  log.fatal(r)
+  puts r
 else
   log.info("Finished saving RSS!")
 end
