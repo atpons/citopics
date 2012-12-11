@@ -120,10 +120,8 @@ begin
     rss.channel.description = "自動的に取得したもので、非公式ですので掲載内容について一切の責任を負いません。 Made by citopics"
     rss.channel.link = "http://www.metro-cit.ac.jp/topics/index.html"
     rss.channel.language = "ja"
-
     rss.items.do_sort = true
     rss.items.max_size = 7
-
     7.times { |i|
       i = rss.items.new_item
       i.title = title.shift
@@ -168,7 +166,3 @@ end
 #finished
 log.progname=""
 log.info("Finished all steps.")
-
-
-
-
