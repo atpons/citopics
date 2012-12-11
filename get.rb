@@ -7,7 +7,7 @@ require "logger"
 
 puts "[CITopics]"
 logdate = Time.now
-log = Logger.new("rss.log" , "daily")
+log = Logger.new("logs/rss.log" , "daily")
 log.level = Logger::INFO
 
 log.info("[CITopics]")
