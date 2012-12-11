@@ -1,7 +1,7 @@
 citopics
 ========
 
-Tokyo Metropolitan College of Industrial Technology の Topics ( http://www.metro-cit.ac.jp/topics/index.html ) から1つずつ情報を取得し、RSS化して保存します。
+Tokyo Metropolitan College of Industrial Technology の Topics ( http://www.metro-cit.ac.jp/ ) から1つずつ情報を取得し、RSS化して保存します。
 また、Sinatraによる RSS 提供サーバ風のものも付いています。
 
 使い方
