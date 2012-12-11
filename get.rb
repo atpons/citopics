@@ -33,7 +33,7 @@ end
 log.progname="titlescrap"
 log.info("Extract titles from HTML...")
 begin
-  doc.xpath('//*[@id="top_main"]/div/div/table/tr/td/a').each do |c|
+  doc.xpath('//*[@id="top_main"]/div/div/table/tr/td/a').children.each do |c|
     #a = NKF.nkf("-w" , c).to_s.gsub("<br />","")
     #tt = a.to_s.gsub("" , "")
     title.push(c)
@@ -163,5 +163,7 @@ end
 #finished
 log.progname=""
 log.info("Finished all steps.")
+
+
 
 
